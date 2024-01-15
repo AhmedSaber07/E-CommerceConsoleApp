@@ -1,0 +1,32 @@
+8 ====>	 Name : DeleteProduct
+	 Parameter Name : @ProductID							----------------->In Products Table
+	 Return : row affected								 
+---------------------------------------------------------------------------------------------------------------------------
+9 ====>  Name : GetAllProducts
+	 Paramerter Name : ----
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+10 ====> Name : GetProductById
+	 parameter Name : @ProductID
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+11 ====> Name : GetProductByName 
+	 Parameter Name ; @ProductName
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+12 ====> Name : GetProductsByCategoryName
+	 parameter Name : @CategoryName
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+13 ====> Name :  CreateOrder 
+	 Parameters Names : @Quantity,@TotalPrice,@OrderId				---------------->In Products Table 
+	 Return : row affected
+---------------------------------------------------------------------------------------------------------------------------
+14 ====> Name : UpdateOrder
+	 Parameter Name : @OrderId , @Quantity ,@TotalPrice , @OrderDate , @UserId	---------------->In Products Table 
+	 Return : row affected
+---------------------------------------------------------------------------------------------------------------------------
+15 ====> Name : DeleteOrder
+	 Parameter Name : @OrderId							---------------->In Products Table 
+	 Return : row affected								
+---------------------------------------------------------------------------------------------------------------------------
