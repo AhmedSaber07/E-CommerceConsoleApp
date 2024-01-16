@@ -1,1 +1,34 @@
 
+--1- Create Category
+----------------------------------
+ sp_CreateCategory @Name NVARCHAR(50)
+----------------------------------
+--2- Update Category
+----------------------------------
+ sp_UpdateCategory
+@Id int, @Name NVARCHAR(50)
+----------------------------------
+--3- Delete Category
+----------------------------------
+ sp_DeleteCategory @Name NVARCHAR(50)
+----------------------------------
+--4- Get All Category
+----------------------------------
+ sp_GetAllCategory 
+----------------------------------
+--5- Get Category By Id
+----------------------------------
+sp_GetCategoryById @Id INT
+----------------------------------
+--6- Get Category By Name
+----------------------------------
+ sp_GetCategoryByName @Name NVARCHAR(50)
+----------------------------------
+--7- Create Product
+----------------------------------
+sp_CreateProduct @Name NVARCHAR(50) ,@Quantity int,@Price Money,@Description NVARCHAR(50),@CategoryId INT
+
+----------------------------------
+--8- Update Product
+----------------------------------
+sp_UpdateProduct @Name NVARCHAR(50) ,@Quantity int,@Price Money,@Description NVARCHAR(50),@CategoryId INT
