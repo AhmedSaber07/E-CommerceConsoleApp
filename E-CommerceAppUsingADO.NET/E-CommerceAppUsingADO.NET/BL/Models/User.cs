@@ -19,6 +19,6 @@ namespace E_CommerceAppUsingADO.NET.BL.Models
         public string Street { get; set; }
         public string BildingNo { get; set; }
         public List<string> PhoneNumber { get; set; }
-     //   public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }
