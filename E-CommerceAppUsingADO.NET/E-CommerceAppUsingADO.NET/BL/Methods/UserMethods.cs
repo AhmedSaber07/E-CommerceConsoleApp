@@ -1,63 +1,65 @@
 ﻿using E_CommerceAppUsingADO.NET.BL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace E_CommerceAppUsingADO.NET.BL.Methods
 {
-     class UserMethods
+    static class UserMethods
     {
-        public Login UserLogin() {
-            Login login = new Login();
-            Console.Write("Enter Email: ");
-            login.Email=Console.ReadLine();
-            Console.Write("Enter Password: ");
-            login.Password=Console.ReadLine();
-            return login;
-        }
-        public User UserRegiser()
+        public static DataTable Login(Login login)
         {
-            User user = new User();
-            string ConfirmPassword;
-            Console.Write("Enter First Name: ");
-            user.FirstName = Console.ReadLine();
-            Console.Write("Enter Last Name: ");
-            user.LastName = Console.ReadLine();
-            Console.Write("Enter Email: ");
-            user.Email = Console.ReadLine();
-            do
+            DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
+            SqlParameter[] para = new SqlParameter[2];
+            para[0] = new SqlParameter("@email", SqlDbType.VarChar, 50);
+            para[0].Value = login.Email;
+
+            para[1] = new SqlParameter("@password", SqlDbType.VarChar, 50);
+            para[1].Value = login.Password;
+
+            DA.open();
+
+            DataTable dt = new DataTable();
+            dt = DA.GetData("LOG_IN", para);
+            DA.close();
+            return dt;
+        }
+        public static void Register(User user)
+        {
+            DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
+            DA.open();
+            SqlParameter[] para = new SqlParameter[5];
+
+            para[0] = new SqlParameter("@fname", SqlDbType.VarChar, 50);
+            para[0].Value = user.FirstName;
+
+            para[1] = new SqlParameter("@lname", SqlDbType.VarChar, 50);
+            para[1].Value = user.LastName;
+
+            para[2] = new SqlParameter("@email", SqlDbType.VarChar, 50);
+            para[2].Value = user.Email;
+
+            para[3] = new SqlParameter("@pwd", SqlDbType.VarChar, 50);
+            para[3].Value = user.Password;
+
+            para[4] = new SqlParameter("@userType", SqlDbType.VarChar, 50);
+            para[4].Value = "Customer";
+
+            DA.ExecuteCommand("signUp", para);
+            SqlParameter[] para1 = new SqlParameter[2];
+            para1[0] = new SqlParameter("@email", SqlDbType.VarChar, 50);
+            para1[0].Value = user.Email;
+            foreach (string phone in user.PhoneNumber)
             {
-                Console.Write("Enter Password: ");
-                user.Password = Console.ReadLine();
-                Console.Write("Enter Confirm Password: ");
-                ConfirmPassword = Console.ReadLine();
-                if(user.Password != ConfirmPassword)
-                    Console.WriteLine("Password and Confirm Password Not Matched!!");
-            } while (user.Password != ConfirmPassword);
-            int countOFPhoneNumber;
-            bool checkCount;
-            do
-            {
-                Console.Write("Enter Count OF Phone Number You Have");
-                checkCount = int.TryParse(Console.ReadLine(),out countOFPhoneNumber);
-            } while (!checkCount);
-            string phoneNumber;
-            for (int i = 0; i < countOFPhoneNumber; i++)
-            {
-                phoneNumber = Console.ReadLine();
-                user.PhoneNumber.Add(phoneNumber);
+                para1[1] = new SqlParameter("@phone", SqlDbType.VarChar, 50);
+                para1[1].Value = phone;
+                DA.ExecuteCommand("AddPhoneNumber", para1);
             }
-            Console.Write("Enter City: ");
-            user.City = Console.ReadLine();
-            Console.Write("Enter Street: ");
-            user.Street = Console.ReadLine();
-            Console.Write("Enter BuildingNo: ");
-            user.BildingNo = Console.ReadLine();
-            Console.WriteLine("\n User Created Successfully");
-            Console.WriteLine("\n******************************************\n");
-            return user;
+            DA.close();
         }
     }
 }

@@ -15,5 +15,6 @@ namespace E_CommerceAppUsingADO.NET.BL.Models
 
         // Relation 1 to M
         public int UserId { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
