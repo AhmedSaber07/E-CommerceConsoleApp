@@ -41,15 +41,23 @@ as
 GetProductsByCategoryName 'mobile'
 -----------------------------------------------------------------------------
 
-create or alter proc CreateOrder @Quantity int , @TotalPrice money,@OrderId int
+create   proc CreateOrder @Quantity int , @TotalPrice money,@UserId int 
 as 
-	if not exists (select Id from Users where Id=@OrderId)
+	if not exists (select Id from Users where Id=@UserId)
 		select 'There is no user found with this id'
 	else 
-	insert into Orders(Quantity,TotalPrice,OrderDate,UserId) Values (@Quantity, @TotalPrice,GetDate(),@OrderId)
+	insert into Orders(Quantity,TotalPrice,OrderDate,UserId) OUTPUT INSERTED.[Id] Values (@Quantity, @TotalPrice,GetDate(),@UserId)
 
 -----Test-----
 CreateOrder 2,15.2,2
+--------------------------------------------------------------------------------
+
+create or alter  proc AddProductsToorder @OrderId int,@ProductId int
+as
+	insert into ProductOrders values (@OrderId,@ProductId)
+
+AddProductsToorder 1,5
+select * from ProductOrders
 --------------------------------------------------------------------------------
 
 Create or Alter proc UpdateOrder 

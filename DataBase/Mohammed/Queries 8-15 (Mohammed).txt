@@ -19,8 +19,8 @@
 	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
 ---------------------------------------------------------------------------------------------------------------------------
 13 ====> Name :  CreateOrder 
-	 Parameters Names : @Quantity,@TotalPrice,@OrderId				---------------->In Products Table 
-	 Return : row affected
+	 Parameters Names : @Quantity,@TotalPrice,@UserId				---------------->In Products Table 
+	 Return : id
 ---------------------------------------------------------------------------------------------------------------------------
 14 ====> Name : UpdateOrder
 	 Parameter Name : @OrderId , @Quantity ,@TotalPrice , @OrderDate , @UserId	---------------->In Products Table 
@@ -30,3 +30,7 @@
 	 Parameter Name : @OrderId							---------------->In Products Table 
 	 Return : row affected								
 ---------------------------------------------------------------------------------------------------------------------------
+16 ====> Name :AddProductsToorder
+	 Parameter Name : @OrderId , @ProductId 
+	 Return : row affected								
+
