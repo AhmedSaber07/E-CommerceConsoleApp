@@ -22,29 +22,29 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             else
             {
                 int orderId=0;
-                para[0] = new SqlParameter("@quantity", SqlDbType.NVarChar, 50);
+                para[0] = new SqlParameter("@Quantity", SqlDbType.Int);
                 para[0].Value = order.Quantity;
 
-                para[1] = new SqlParameter("@totalPrice", SqlDbType.Float);
+                para[1] = new SqlParameter("@TotalPrice", SqlDbType.Float);
                 para[1].Value = order.TotalPrice;
 
                 para[2] = new SqlParameter("@orderDate", SqlDbType.DateTime);
                 para[2].Value = DateTime.Now;
 
-                para[3] = new SqlParameter("@userId", SqlDbType.Int);
+                para[3] = new SqlParameter("@UserId", SqlDbType.Int);
                 para[3].Value = userId;
 
-                para[4] = new SqlParameter("@orderId", SqlDbType.Int);
+                para[4] = new SqlParameter("@id", SqlDbType.Int);
                 para[4].Direction = ParameterDirection.Output;
                 para[4].Value = orderId;
 
                 DA.open();
                 DA.ExecuteCommand("CreateOrder", para);
-                para2[0] = new SqlParameter("ProductId",SqlDbType.Int);
-                para2[0].Value = productId;
-                para2[1] = new SqlParameter("OrderId", orderId);
-                para2[1].Value = orderId;
-                DA.ExecuteCommand("InsertInProductOrderTb",para2);
+                para2[0] = new SqlParameter("OrderId", orderId);
+                para2[0].Value = orderId;
+                para2[1] = new SqlParameter("ProductId",SqlDbType.Int);
+                para2[1].Value = productId;
+                DA.ExecuteCommand("AddProductsToorder", para2);
                 DA.close();
             }
         }
@@ -59,45 +59,48 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             else
             {
                 DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
-                SqlParameter[] para = new SqlParameter[4];
+                SqlParameter[] para = new SqlParameter[5];
                 SqlParameter[] para2 = new SqlParameter[2];
-                    para[0] = new SqlParameter("@quantity", SqlDbType.NVarChar, 50);
-                    para[0].Value = order.Quantity;
+                    para[0] = new SqlParameter("@OrderId", SqlDbType.Int);
+                    para[0].Value = orderId;
 
-                    para[1] = new SqlParameter("@totalPrice", SqlDbType.Float);
-                    para[1].Value = order.TotalPrice;
+                    para[1] = new SqlParameter("@Quantity", SqlDbType.Int);
+                    para[1].Value = order.Quantity;
 
-                    para[2] = new SqlParameter("@orderDate", SqlDbType.DateTime);
-                    para[2].Value = DateTime.Now;
+                    para[2] = new SqlParameter("@TotalPrice", SqlDbType.Float);
+                    para[2].Value = order.TotalPrice;
 
-                    para[3] = new SqlParameter("@userId", SqlDbType.Int);
-                    para[3].Value = userId;
+                    para[3] = new SqlParameter("@OrderDate", SqlDbType.DateTime);
+                    para[3].Value = DateTime.Now;
 
-                    para[4] = new SqlParameter("@orderId", SqlDbType.Int);
-                    para[4].Direction = ParameterDirection.Output;
-                    para[4].Value = orderId;
+                    para[4] = new SqlParameter("@UserId", SqlDbType.Int);
+                    para[4].Value = userId;
+
+                    //para[4] = new SqlParameter("@OrderId", SqlDbType.Int);
+                    //para[4].Direction = ParameterDirection.Output;
+                    //para[4].Value = orderId;
 
                     DA.open();
                     DA.ExecuteCommand("CreateOrder", para);
-                    para2[0] = new SqlParameter("ProductId", SqlDbType.Int);
+                    para2[0] = new SqlParameter("@ProductId", SqlDbType.Int);
                     para2[0].Value = productId;
-                    para2[1] = new SqlParameter("OrderId", orderId);
+                    para2[1] = new SqlParameter("@OrderId", orderId);
                     para2[1].Value = orderId;
                     DA.ExecuteCommand("UpdateInProductOrderTb", para2);
                     DA.close();
             }
 
         }
-        public static void DeleteOrder(int orderId,int userId,int productId)
+        public static void DeleteOrder(int orderId,int productId)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
-            SqlParameter[] para = new SqlParameter[3];
+            SqlParameter[] para = new SqlParameter[1];
             para[0] = new SqlParameter("@orderId", SqlDbType.Int);
             para[0].Value = orderId;
-            para[1] = new SqlParameter("@userId", SqlDbType.Int);
-            para[1].Value = productId;
-            para[2] = new SqlParameter("@productId", SqlDbType.Int);
-            para[2].Value = userId;
+            //para[1] = new SqlParameter("@userId", SqlDbType.Int);
+            //para[1].Value = productId;
+            //para[2] = new SqlParameter("@productId", SqlDbType.Int);
+            //para[2].Value = userId;
             DA.open();
             DA.ExecuteCommand("DeleteOrder", para);
             SqlParameter[] para1 = new SqlParameter[2];
@@ -125,7 +128,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             order.OrderDate = Convert.ToDateTime(dataTable.Rows[0][2]);
             order.UserId= Convert.ToInt32(dataTable.Rows[0][3]);
             return order;
-        }
+        }   
         public static List<Order> GetOrderByUserId(int userId)
         {
             List<Order> orders = new List<Order>();

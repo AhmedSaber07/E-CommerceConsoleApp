@@ -1,4 +1,5 @@
-﻿using E_CommerceAppUsingADO.NET.BL.Models;
+﻿using E_CommerceAppUsingADO.NET.BL.Enums;
+using E_CommerceAppUsingADO.NET.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,7 @@ namespace E_CommerceAppUsingADO.NET.PL
             user.Street = Console.ReadLine();
             Console.Write("Enter BuildingNo: ");
             user.BildingNo = Console.ReadLine();
+            user.UserType = UserType.Customer;
             Console.WriteLine("\n User Created Successfully");
             Console.WriteLine("\n******************************************\n");
             return user;

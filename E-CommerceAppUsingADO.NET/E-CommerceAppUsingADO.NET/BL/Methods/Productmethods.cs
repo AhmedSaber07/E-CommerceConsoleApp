@@ -66,7 +66,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[1];
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@ProductID", SqlDbType.Int);
             para[0].Value = productId;
             DA.open();
             DA.ExecuteCommand("DeleteProduct", para);
@@ -78,7 +78,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             SqlParameter[] para = new SqlParameter[1];
             DataTable dataTable = new DataTable();
             Product product = new Product();
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@ProductID", SqlDbType.Int);
             para[0].Value = productId;
             DA.open();
             dataTable =  DA.GetData("GetProductById",para);
@@ -91,13 +91,32 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             product.CategoryId = Convert.ToInt32(dataTable.Rows[0][4]);
             return product;
         }
+        public static Product GetByName(string productName)
+        {
+            DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
+            SqlParameter[] para = new SqlParameter[1];
+            DataTable dataTable = new DataTable();
+            Product product = new Product();
+            para[0] = new SqlParameter("@ProductName", SqlDbType.VarChar,50);
+            para[0].Value = productName;
+            DA.open();
+            dataTable = DA.GetData("GetProductByName", para);
+            DA.close();
+            product.Id = Convert.ToInt32(dataTable.Rows[0][0]);
+            product.Name = Convert.ToString(dataTable.Rows[0][1]);
+            product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
+            product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
+            product.Description = Convert.ToString(dataTable.Rows[0][4]);
+            product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
+            return product;
+        }
         public static List<Product> GetAll()
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             DataTable dataTable = new DataTable();
             List<Product> products = new List<Product>();
             DA.open();
-            dataTable = DA.GetData("GetAllProduct",null);
+            dataTable = DA.GetData("GetAllProducts", null);
             DA.close();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -112,16 +131,16 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             }
             return products;
         }
-        public static List<Product> GetAllByCategoryId(int categoryId)
+        public static List<Product> GetAllByCategoryName(string categoryName)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             DataTable dataTable = new DataTable();
             List<Product> products = new List<Product>();
             SqlParameter[] para = new SqlParameter[1];
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
-            para[0].Value = categoryId;
+            para[0] = new SqlParameter("@CategoryName", SqlDbType.VarChar,50);
+            para[0].Value = categoryName;
             DA.open();
-            dataTable = DA.GetData("GetAllProductByCategoryId", para);
+            dataTable = DA.GetData("GetProductsByCategoryName", para);
             DA.close();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -131,7 +150,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
                 product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
                 product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
                 product.Description = Convert.ToString(dataTable.Rows[0][4]);
-                product.CategoryId = categoryId;
+                product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
                 products.Add(product);
             }
             return products;

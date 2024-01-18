@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mohamed\\Desktop\\E-Commerce Console App Using ADO.NET\\E-Commerce\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj": {}
+    "F:\\ITI\\FullStack\\8-C#&OOP\\Project\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mohamed\\Desktop\\E-Commerce Console App Using ADO.NET\\E-Commerce\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj": {
+    "F:\\ITI\\FullStack\\8-C#&OOP\\Project\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mohamed\\Desktop\\E-Commerce Console App Using ADO.NET\\E-Commerce\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj",
+        "projectUniqueName": "F:\\ITI\\FullStack\\8-C#&OOP\\Project\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj",
         "projectName": "E-CommerceAppUsingADO.NET",
-        "projectPath": "C:\\Users\\Mohamed\\Desktop\\E-Commerce Console App Using ADO.NET\\E-Commerce\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj",
-        "packagesPath": "C:\\Users\\Mohamed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mohamed\\Desktop\\E-Commerce Console App Using ADO.NET\\E-Commerce\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\obj\\",
+        "projectPath": "F:\\ITI\\FullStack\\8-C#&OOP\\Project\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET.csproj",
+        "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
+        "outputPath": "F:\\ITI\\FullStack\\8-C#&OOP\\Project\\E-CommerceAppUsingADO.NET\\E-CommerceAppUsingADO.NET\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mohamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "ConsoleTables": {
+              "target": "Package",
+              "version": "[2.6.1, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.6, )"
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

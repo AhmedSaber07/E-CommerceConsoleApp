@@ -15,32 +15,32 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[1];
-            para[0] = new SqlParameter("@name", SqlDbType.NVarChar, 50);
+            para[0] = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
             para[0].Value = category.Name;
             DA.open();
-            DA.ExecuteCommand("CreateCategory", para);
+            DA.ExecuteCommand("sp_CreateCategory", para);
             DA.close();
         }
         public static void Update(Category category, int categoryId)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[2];
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@Id", SqlDbType.Int);
             para[0].Value = categoryId;
-            para[1] = new SqlParameter("@name", SqlDbType.NVarChar, 50);
+            para[1] = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
             para[1].Value = category.Name;
             DA.open();
-            DA.ExecuteCommand("UpdateCategory", para);
+            DA.ExecuteCommand("sp_UpdateCategory", para);
             DA.close();
         }
         public static void Delete(int categoryId)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[1];
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@Id", SqlDbType.Int);
             para[0].Value = categoryId;
             DA.open();
-            DA.ExecuteCommand("DeleteCategory", para);
+            DA.ExecuteCommand("sp_DeleteCategory", para);
             DA.close();
         }
         public static Category GetById(int categoryId)
@@ -49,12 +49,27 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             SqlParameter[] para = new SqlParameter[1];
             DataTable dataTable = new DataTable();
             Category category = new Category();
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@Id", SqlDbType.Int);
             para[0].Value = categoryId;
             DA.open();
-            dataTable = DA.GetData("GetCategoryById", para);
+            dataTable = DA.GetData("sp_GetCategoryById", para);
             DA.close();
             category.Id = categoryId;
+            category.Name = Convert.ToString(dataTable.Rows[0][0]);
+            return category;
+        }
+        public static Category GetByName(string name)
+        {
+            DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
+            SqlParameter[] para = new SqlParameter[1];
+            DataTable dataTable = new DataTable();
+            Category category = new Category();
+            para[0] = new SqlParameter("@Name", SqlDbType.Int);
+            para[0].Value = name;
+            DA.open();
+            dataTable = DA.GetData("sp_GetCategoryByName", para);
+            DA.close();
+            category.Name = name;
             category.Name = Convert.ToString(dataTable.Rows[0][0]);
             return category;
         }

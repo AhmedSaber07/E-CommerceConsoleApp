@@ -8,6 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = E_CommerceAppUsingADO.NET
-build_property.ProjectDir = C:\Users\Mohamed\Desktop\E-Commerce Console App Using ADO.NET\E-Commerce\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\
