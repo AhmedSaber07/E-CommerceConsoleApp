@@ -1,34 +1,94 @@
+1 ====>	 Name : sp_CreateCategory
+	 Parameter Name : @Name							----------------->In Category Table
+	 Return : row affected								 
+---------------------------------------------------------------------------------------------------------------------------
+2 ====>	 Name : sp_CreateCategory
+	 Parameter Name :@Id, @Name							----------------->In Category Table
+	 Return : row affected								 
+---------------------------------------------------------------------------------------------------------------------------
+3 ====>	 Name : sp_DeleteCategory
+	 Parameter Name : @Name							----------------->In Category Table
+	 Return : row affected								 
+---------------------------------------------------------------------------------------------------------------------------
+4 ====>	 Name : sp_GetAllCategory
+	 Parameter Name : None 							----------------->In Category Table
+	 Return : table 								 
+---------------------------------------------------------------------------------------------------------------------------
+5 ====>	 Name :sp_GetCategoryById
+	 Parameter Name : @Id							----------------->In Category Table
+	 Return : @Id,@Name							 
+---------------------------------------------------------------------------------------------------------------------------
+6 ====>	 Name :sp_GetCategoryByName
+	 Parameter Name : @Name							----------------->In Category Table
+	 Return : @Id,@Name							 
+---------------------------------------------------------------------------------------------------------------------------
+7 ====>	 Name :sp_CreateProduct
+	 Parameter Name :  @Name,@Quantity,@Price,@Description ,@CategoryId    	----------------->In Product Table
+	 Return : row affected							 
+---------------------------------------------------------------------------------------------------------------------------
+8 ====>	 Name :sp_UpdateProduct
+	 Parameter Name :  @Name,@Quantity,@Price,@Description ,@CategoryId    	----------------->In Product Table
+	 Return : row affected						 
+---------------------------------------------------------------------------------------------------------------------------
 
---1- Create Category
-----------------------------------
- sp_CreateCategory @Name NVARCHAR(50)
-----------------------------------
---2- Update Category
-----------------------------------
- sp_UpdateCategory
-@Id int, @Name NVARCHAR(50)
-----------------------------------
---3- Delete Category
-----------------------------------
- sp_DeleteCategory @Name NVARCHAR(50)
-----------------------------------
---4- Get All Category
-----------------------------------
- sp_GetAllCategory 
-----------------------------------
---5- Get Category By Id
-----------------------------------
-sp_GetCategoryById @Id INT
-----------------------------------
---6- Get Category By Name
-----------------------------------
- sp_GetCategoryByName @Name NVARCHAR(50)
-----------------------------------
---7- Create Product
-----------------------------------
-sp_CreateProduct @Name NVARCHAR(50) ,@Quantity int,@Price Money,@Description NVARCHAR(50),@CategoryId INT
 
-----------------------------------
---8- Update Product
-----------------------------------
-sp_UpdateProduct @Name NVARCHAR(50) ,@Quantity int,@Price Money,@Description NVARCHAR(50),@CategoryId INT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9 ====>  Name : GetAllProducts
+	 Paramerter Name : ----
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+10 ====> Name : GetProductById
+	 parameter Name : @ProductID
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+11 ====> Name : GetProductByName 
+	 Parameter Name ; @ProductName
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+12 ====> Name : GetProductsByCategoryName
+	 parameter Name : @CategoryName
+	 Return : id , ProductName , Quantity , Price , Description , Categoryid	----------------->Of Products Table 
+---------------------------------------------------------------------------------------------------------------------------
+13 ====> Name :  CreateOrder 
+	 Parameters Names : @Quantity,@TotalPrice,@OrderDate,@UserId				---------------->In Products Table 
+	 Return : id
+---------------------------------------------------------------------------------------------------------------------------
+14 ====> Name : UpdateOrder
+	 Parameter Name : @OrderId , @Quantity ,@TotalPrice , @OrderDate , @UserId	---------------->In Products Table 
+	 Return : row affected
+---------------------------------------------------------------------------------------------------------------------------
+15 ====> Name : DeleteOrder
+	 Parameter Name : @OrderId							---------------->In Products Table 
+	 Return : row affected								
+---------------------------------------------------------------------------------------------------------------------------
+16 ====> Name :AddProductsToorder
+	 Parameter Name : @OrderId , @ProductId 
+	 Return : row affected								
+
