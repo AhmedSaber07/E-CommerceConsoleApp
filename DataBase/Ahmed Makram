@@ -2,12 +2,12 @@
 	 Parameter Name : @Name							----------------->In Category Table
 	 Return : row affected								 
 ---------------------------------------------------------------------------------------------------------------------------
-2 ====>	 Name : sp_CreateCategory
+2 ====>	 Name : sp_UpdateCategory
 	 Parameter Name :@Id, @Name							----------------->In Category Table
 	 Return : row affected								 
 ---------------------------------------------------------------------------------------------------------------------------
 3 ====>	 Name : sp_DeleteCategory
-	 Parameter Name : @Name							----------------->In Category Table
+	 Parameter Name : @Id							----------------->In Category Table
 	 Return : row affected								 
 ---------------------------------------------------------------------------------------------------------------------------
 4 ====>	 Name : sp_GetAllCategory
@@ -27,7 +27,7 @@
 	 Return : row affected							 
 ---------------------------------------------------------------------------------------------------------------------------
 8 ====>	 Name :sp_UpdateProduct
-	 Parameter Name :  @Name,@Quantity,@Price,@Description ,@CategoryId    	----------------->In Product Table
+	 Parameter Name : @Id, @Name,@Quantity,@Price,@Description ,@CategoryId    	----------------->In Product Table
 	 Return : row affected						 
 ---------------------------------------------------------------------------------------------------------------------------
 
