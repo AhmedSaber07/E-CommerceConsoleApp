@@ -15,12 +15,11 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[1];
-            para[0] = new SqlParameter("@productId", SqlDbType.Int);
+            para[0] = new SqlParameter("@Id", SqlDbType.Int);
             para[0].Value = productId;
             DA.open();
-
             DataTable dt = new DataTable();
-            dt = DA.GetData("GetQuanatityOfProduct", para);
+            dt = DA.GetData("sp_GetProductQuantity", para);
             DA.close();
             return Convert.ToInt32(dt.Rows[0][0]);
         }
@@ -28,38 +27,47 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[5];
-            para[0] = new SqlParameter("@name", SqlDbType.NVarChar,50);
+            para[0] = new SqlParameter("@Name", SqlDbType.NVarChar,50);
             para[0].Value = product.Name;
-            para[1] = new SqlParameter("@price", SqlDbType.Decimal);
-            para[1].Value = product.Price;
-            para[2] = new SqlParameter("@description", SqlDbType.NVarChar, 50);
-            para[2].Value = product.Description;
-            para[3] = new SqlParameter("@quantity", SqlDbType.Int);
-            para[3].Value = product.Quantity;
-            para[4] = new SqlParameter("@categoryId", SqlDbType.Int);
+
+            para[1] = new SqlParameter("@Quantity", SqlDbType.Int);
+            para[1].Value = product.Quantity;
+
+            para[2] = new SqlParameter("@Price", SqlDbType.Decimal);
+            para[2].Value = product.Price;
+
+            para[3] = new SqlParameter("@Description", SqlDbType.NVarChar, 50);
+            para[3].Value = product.Description;
+
+            para[4] = new SqlParameter("@CategoryId", SqlDbType.Int);
             para[4].Value = product.CategoryId;
             DA.open();
-            DA.ExecuteCommand("CreateProduct", para);
+            DA.ExecuteCommand("sp_CreateProduct", para);
             DA.close();
         }
         public static void Update(Product product,int productId)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[6];
-            para[0] = new SqlParameter("@id", SqlDbType.Int);
+            para[0] = new SqlParameter("@Id", SqlDbType.Int);
             para[0].Value = productId;
-            para[1] = new SqlParameter("@name", SqlDbType.NVarChar, 50);
+            
+            para[1] = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
             para[1].Value = product.Name;
-            para[2] = new SqlParameter("@price", SqlDbType.Decimal);
-            para[2].Value = product.Price;
-            para[3] = new SqlParameter("@description", SqlDbType.NVarChar, 50);
-            para[3].Value = product.Description;
-            para[4] = new SqlParameter("@quantity", SqlDbType.Int);
-            para[4].Value = product.Quantity;
+            
+            para[2] = new SqlParameter("@Quantity", SqlDbType.Int);
+            para[2].Value = product.Quantity;
+            
+            para[3] = new SqlParameter("@Price", SqlDbType.Decimal);
+            para[3].Value = product.Price;
+
+            para[4] = new SqlParameter("@Description", SqlDbType.NVarChar, 50);
+            para[4].Value = product.Description;
+            
             para[5] = new SqlParameter("@categoryId", SqlDbType.Int);
             para[5].Value = product.CategoryId;
             DA.open();
-            DA.ExecuteCommand("UpdateProduct", para);
+            DA.ExecuteCommand("sp_UpdateProduct", para);
             DA.close();
         }
         public static void Delete(int productId)
@@ -84,14 +92,14 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             dataTable =  DA.GetData("GetProductById",para);
             DA.close();
             product.Id = productId;
-            product.Name = Convert.ToString(dataTable.Rows[0][0]);
-            product.Quantity = Convert.ToInt32(dataTable.Rows[0][1]);
-            product.Price = Convert.ToDecimal(dataTable.Rows[0][2]);
-            product.Description = Convert.ToString(dataTable.Rows[0][3]);
-            product.CategoryId = Convert.ToInt32(dataTable.Rows[0][4]);
+            product.Name = Convert.ToString(dataTable.Rows[0][1]);
+            product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
+            product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
+            product.Description = Convert.ToString(dataTable.Rows[0][4]);
+            product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
             return product;
         }
-        public static Product GetByName(string productName)
+        public static DataTable GetByName(string productName)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             SqlParameter[] para = new SqlParameter[1];
@@ -102,13 +110,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             DA.open();
             dataTable = DA.GetData("GetProductByName", para);
             DA.close();
-            product.Id = Convert.ToInt32(dataTable.Rows[0][0]);
-            product.Name = Convert.ToString(dataTable.Rows[0][1]);
-            product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
-            product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
-            product.Description = Convert.ToString(dataTable.Rows[0][4]);
-            product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
-            return product;
+            return dataTable;
         }
         public static List<Product> GetAll()
         {
@@ -121,17 +123,17 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 Product product = new Product();
-                product.Id = Convert.ToInt32(dataTable.Rows[0][0]);
-                product.Name = Convert.ToString(dataTable.Rows[0][1]);
-                product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
-                product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
-                product.Description = Convert.ToString(dataTable.Rows[0][4]);
-                product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
+                product.Id = Convert.ToInt32(dataTable.Rows[i][0]);
+                product.Name = Convert.ToString(dataTable.Rows[i][1]);
+                product.Quantity = Convert.ToInt32(dataTable.Rows[i][2]);
+                product.Price = Convert.ToDecimal(dataTable.Rows[i][3]);
+                product.Description = Convert.ToString(dataTable.Rows[i][4]);
+                product.CategoryId = Convert.ToInt32(dataTable.Rows[i][5]);
                 products.Add(product);
             }
             return products;
         }
-        public static List<Product> GetAllByCategoryName(string categoryName)
+        public static DataTable GetAllByCategoryName(string categoryName)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             DataTable dataTable = new DataTable();
@@ -142,19 +144,21 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             DA.open();
             dataTable = DA.GetData("GetProductsByCategoryName", para);
             DA.close();
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                Product product = new Product();
-                product.Id = Convert.ToInt32(dataTable.Rows[0][0]);
-                product.Name = Convert.ToString(dataTable.Rows[0][1]);
-                product.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
-                product.Price = Convert.ToDecimal(dataTable.Rows[0][3]);
-                product.Description = Convert.ToString(dataTable.Rows[0][4]);
-                product.CategoryId = Convert.ToInt32(dataTable.Rows[0][5]);
-                products.Add(product);
-            }
-            return products;
+            return dataTable;
         }
+        //public static decimal GetPrice(int productId)
+        //{
+        //    DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
+        //    SqlParameter[] para = new SqlParameter[1];
+        //    para[0] = new SqlParameter("@Id", SqlDbType.Int);
+        //    para[0].Value = productId;
+        //    DA.open();
+
+        //    DataTable dt = new DataTable();
+        //    dt = DA.GetData("sp_GetProductPrice", para);
+        //    DA.close();
+        //    return Convert.ToDecimal(dt.Rows[0][0]);
+        //}
 
     }
 }

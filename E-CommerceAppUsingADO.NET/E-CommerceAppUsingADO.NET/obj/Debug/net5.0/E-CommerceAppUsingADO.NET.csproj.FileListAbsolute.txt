@@ -9,7 +9,6 @@ F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingAD
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.AssemblyInfo.cs
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.csproj.CoreCompileInputs.cache
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.dll
-F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\refint\E-CommerceAppUsingADO.NET.dll
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.pdb
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.genruntimeconfig.cache
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\ref\E-CommerceAppUsingADO.NET.dll
@@ -22,3 +21,4 @@ F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingAD
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.csproj.AssemblyReference.cache
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\obj\Debug\net5.0\E-CommerceAppUsingADO.NET.csproj.CopyComplete
 F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\bin\Debug\net5.0\ConsoleTables.dll
+F:\ITI\FullStack\8-C#&OOP\Project\E-CommerceAppUsingADO.NET\E-CommerceAppUsingADO.NET\bin\Debug\net5.0\ref\E-CommerceAppUsingADO.NET.dll

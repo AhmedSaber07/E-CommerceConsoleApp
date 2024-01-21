@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace E_CommerceAppUsingADO.NET.BL.Enums
 {
-    enum UserOperations
+    enum CRUD
     {
-        Login=49,
-        Register,
-        Exit
+        Create=49,
+        Update,
+        Delete,
+        GetById,
+        GetAll
     }
 }

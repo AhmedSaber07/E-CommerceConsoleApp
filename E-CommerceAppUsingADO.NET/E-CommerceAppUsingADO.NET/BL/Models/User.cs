@@ -15,10 +15,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public UserType UserType { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string BildingNo { get; set; }
-        public List<string> PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public List<Order> Orders { get; set; }
     }
 }

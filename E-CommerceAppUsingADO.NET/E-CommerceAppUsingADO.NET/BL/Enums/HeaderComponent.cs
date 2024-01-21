@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace E_CommerceAppUsingADO.NET.BL.Enums
 {
-    enum UserOperations
+    enum HeaderComponent
     {
-        Login=49,
+        Home=49,
+        Products,
+        Categories,
+        Orders,
         Register,
-        Exit
+        LoginOrLogOut
     }
 }
