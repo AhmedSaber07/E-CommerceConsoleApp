@@ -143,7 +143,7 @@ namespace E_CommerceAppUsingADO.NET.PL
                         {
                             Console.Clear();
                             Header();
-                            userId = UserUI.UserLogin().Id;
+                            userId = UserUI.UserLogin();
                             if (userId != 0)
                             {
                                 Console.Clear();

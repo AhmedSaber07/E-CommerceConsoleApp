@@ -16,6 +16,6 @@ namespace E_CommerceAppUsingADO.NET.BL.Models
         public string Password { get; set; }
         public UserType UserType { get; set; }
         public string PhoneNumber { get; set; }
-        public List<Order> Orders { get; set; }
+        //public List<Order> Orders { get; set; }
     }
 }

@@ -146,19 +146,5 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             DA.close();
             return dataTable;
         }
-        //public static decimal GetPrice(int productId)
-        //{
-        //    DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
-        //    SqlParameter[] para = new SqlParameter[1];
-        //    para[0] = new SqlParameter("@Id", SqlDbType.Int);
-        //    para[0].Value = productId;
-        //    DA.open();
-
-        //    DataTable dt = new DataTable();
-        //    dt = DA.GetData("sp_GetProductPrice", para);
-        //    DA.close();
-        //    return Convert.ToDecimal(dt.Rows[0][0]);
-        //}
-
     }
 }

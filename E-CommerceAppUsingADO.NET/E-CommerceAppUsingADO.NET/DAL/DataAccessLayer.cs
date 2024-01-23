@@ -13,7 +13,8 @@ namespace E_CommerceAppUsingADO.NET.DAL
         SqlConnection con;
         public DataAccessLayer()
         {
-            con = new SqlConnection("Data Source=DESKTOP-TDQADM2\\AHMEDSABER;Initial Catalog=EcommerceProject;Integrated Security=True");
+            //con = new SqlConnection("Data Source=DESKTOP-TDQADM2\\AHMEDSABER;Initial Catalog=EcommerceProject;Integrated Security=True");
+            con = new SqlConnection("Data Source=DESKTOP-TDQADM2\\MSSQLSERVER02;Initial Catalog=EcommerceProject;Integrated Security=True");
         }
         public void open()
         {

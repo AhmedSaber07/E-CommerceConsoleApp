@@ -8,6 +8,7 @@ namespace E_CommerceAppUsingADO.NET.BL.Dtos
 {
     class DisplayOrdersOFUserDto
     {
+        public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal FinalPrice { get; set; }
     }

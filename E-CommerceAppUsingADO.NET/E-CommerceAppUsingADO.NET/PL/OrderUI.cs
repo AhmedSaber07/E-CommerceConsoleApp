@@ -87,24 +87,16 @@ namespace E_CommerceAppUsingADO.NET.PL
         }
         public static void UpdateOrderDetails(int orderId)
         {
-            Product product = new Product();
-            product = ProductValidations.checkProductNameValidation();
-            DataTable dataTable = OrderDetailsMethods.GetOrderDetailsOFProduct(orderId, product.Id);
-            if (dataTable.Rows.Count == 0)
-                BaseValidation.DisplayTextWithRedColor("You Not Orderd This Product");
-            else
+            OrderDetails orderDetails = new OrderDetails();
+            orderDetails = OrderValidations.GetOrderDetails(orderId);
+            if (!OrderValidations.ProductDetailsIsNull(orderDetails))
             {
-                OrderDetails orderDetails = new OrderDetails();
-                orderDetails.ProductId = Convert.ToInt32(dataTable.Rows[0][0]);
-                orderDetails.OrderId = Convert.ToInt32(dataTable.Rows[0][1]);
-                orderDetails.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
-                orderDetails.TotalPrice = Convert.ToDecimal(dataTable.Rows[0][3]);
                 OrderDetailsMethods.DeleteOrderDetails(orderDetails);
-                int quantity = ProductValidations.validQuantity(product.Id);
+                int quantity = ProductValidations.validQuantity(orderDetails.ProductId);
                 orderDetails.OrderId = orderId;
-                orderDetails.ProductId = product.Id;
+                orderDetails.ProductId = orderDetails.ProductId;
                 orderDetails.Quantity = quantity;
-                orderDetails.TotalPrice = product.Price * quantity;
+                orderDetails.TotalPrice =Productmethods.GetById(orderDetails.ProductId).Price * quantity;
                 OrderDetailsMethods.CreateOrderDetails(orderDetails);
                 BaseValidation.DisplayTextWithGreenColor("Order Updated Successfully......");
                 DisplayOrderDetails(new List<OrderDetails>() { orderDetails });
@@ -113,14 +105,11 @@ namespace E_CommerceAppUsingADO.NET.PL
         }
         public static void DeleteOrderDetails(int orderId)
         {
-            Product product = new Product();
-            product = ProductValidations.checkProductNameValidation();
-           DataTable dataTable = OrderDetailsMethods.GetOrderDetailsOFProduct(orderId, product.Id);
-            if (dataTable.Rows.Count == 0)
-                BaseValidation.DisplayTextWithRedColor("You Not Orderd This Product");
-            else
+            OrderDetails orderDetails = new OrderDetails();
+            orderDetails = OrderValidations.GetOrderDetails(orderId);
+            char c;
+            if (!OrderValidations.ProductDetailsIsNull(orderDetails))
             {
-                char c;
                 do
                 {
                     Console.WriteLine("Are you sure you want to delete this order ? (y/n) : ");
@@ -128,13 +117,10 @@ namespace E_CommerceAppUsingADO.NET.PL
                 } while (c != 'y' && c != 'n');
                 if (c == 'y')
                 {
-                    OrderDetails orderDetails = new OrderDetails();
-                    orderDetails.ProductId = Convert.ToInt32(dataTable.Rows[0][0]);
-                    orderDetails.OrderId = Convert.ToInt32(dataTable.Rows[0][1]);
-                    orderDetails.Quantity = Convert.ToInt32(dataTable.Rows[0][2]);
-                    orderDetails.TotalPrice = Convert.ToDecimal(dataTable.Rows[0][3]);
-                    OrderDetailsMethods.DeleteOrderDetails(orderDetails);
-                    BaseValidation.DisplayTextWithGreenColor("Order Deleted Successfully......");
+                    {
+                        OrderDetailsMethods.DeleteOrderDetails(orderDetails);
+                        BaseValidation.DisplayTextWithGreenColor("Order Deleted Successfully......");
+                    }
                 }
             }
             Console.ReadKey();
@@ -143,7 +129,7 @@ namespace E_CommerceAppUsingADO.NET.PL
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             var table = new ConsoleTable("Final Price");
-                table.AddRow(FinalPrice);
+                table.AddRow(FinalPrice.ToString("C2"));
             table.Write();
             Console.ResetColor();
         }
@@ -152,69 +138,67 @@ namespace E_CommerceAppUsingADO.NET.PL
             var table = new ConsoleTable("Product Name", "Quantity", "Product Price", "Total Price");
             foreach (var orderdetails in orderDetails)
             {
-                table.AddRow(Productmethods.GetById(orderdetails.ProductId).Name, orderdetails.Quantity,Productmethods.GetById(orderdetails.ProductId).Price, orderdetails.TotalPrice);
+                table.AddRow(Productmethods.GetById(orderdetails.ProductId).Name, orderdetails.Quantity,Productmethods.GetById(orderdetails.ProductId).Price.ToString("C2"), orderdetails.TotalPrice.ToString("C2"));
             }
             table.Write();
         }
         public static void DisplayAllOrder()
         {
-            DataTable dataTable = OrderMethods.getAllOrders();
-            if (dataTable.Rows.Count == 0)
-                BaseValidation.DisplayTextWithRedColor("No Orders yet....");
-            else
+            List<DIsplayAllOrdersDto> dIsplayAllOrdersDtos = new List<DIsplayAllOrdersDto>();
+            dIsplayAllOrdersDtos = OrderValidations.GetAllOrders();
+            if (dIsplayAllOrdersDtos.Count > 0)
             {
                 var table = new ConsoleTable("Full Name", "Email", "Order Date", "Final Price");
-                for (int i = 0; i < dataTable.Rows.Count; i++)
+                foreach (var order in dIsplayAllOrdersDtos)
                 {
-                    DIsplayAllOrdersDto displayOrdersDto = new DIsplayAllOrdersDto();
-                    displayOrdersDto.FullName = Convert.ToString(dataTable.Rows[0][0]);
-                    displayOrdersDto.Email = Convert.ToString(dataTable.Rows[0][1]);
-                    displayOrdersDto.OrderDate = Convert.ToDateTime(dataTable.Rows[0][2]);
-                    displayOrdersDto.FinalPrice = Convert.ToDecimal(dataTable.Rows[0][3]);
-                    table.AddRow(displayOrdersDto.FullName, displayOrdersDto.Email, displayOrdersDto.OrderDate, displayOrdersDto.FinalPrice);
+                    table.AddRow(order.FullName, order.Email, order.OrderDate, order.FinalPrice.ToString("C2"));
+
                 }
                 table.Write();
             }
             Console.ReadKey();
         }
-        public static void DisplayOrdersOFUser(int userId)
+        public static void DisplayOrdersOFUser(int userId,int orderId)
         {
-            DataTable dataTable = OrderMethods.getAllOrdersOFUser(userId);
-            if (dataTable.Rows.Count == 0)
-                BaseValidation.DisplayTextWithRedColor("No Orders");
-            else
+            DisplayOrdersOFUserDto displayOrdersOFUserDtos = new DisplayOrdersOFUserDto();
+            displayOrdersOFUserDtos = OrderValidations.GetOrderOFUser(userId,orderId);
+            if(displayOrdersOFUserDtos.FinalPrice!=0)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 var table = new ConsoleTable("Order Date", "Final Price");
-                for (int i=0;i<dataTable.Rows.Count;i++)
-                {
-                    DisplayOrdersOFUserDto displayOrdersDto = new DisplayOrdersOFUserDto();
-                    displayOrdersDto.OrderDate = Convert.ToDateTime(dataTable.Rows[i][0]);
-                    displayOrdersDto.FinalPrice = Convert.ToDecimal(dataTable.Rows[i][1]);
-                    table.AddRow(displayOrdersDto.OrderDate, displayOrdersDto.FinalPrice);
-                }
+                   table.AddRow(displayOrdersOFUserDtos.OrderDate, displayOrdersOFUserDtos.FinalPrice.ToString("C2"));
+                
                 table.Write();
+                Console.ResetColor();
             }
-            Console.ReadKey();
         }
         public static void DisplayAllOrderDetailsOFUser(int userId)
         {
-            DataTable dataTable = OrderDetailsMethods.getOrderDetailsOFUser(userId);
-            if (dataTable.Rows.Count == 0)
-                BaseValidation.DisplayTextWithRedColor("No Orders");
-            else
+            List<DisplayOrderDetailsDto> displayOrderDetailsDtos = OrderValidations.GetAllOrderDetailsOFUser(userId);
+            if (displayOrderDetailsDtos.Count > 0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 var table = new ConsoleTable("Product Name", "Quantity", "Price", "Total Price");
-                for (int i = 0; i < dataTable.Rows.Count; i++)
+                int orderId = displayOrderDetailsDtos.First().OrderId;
+                foreach (var orderDetails in displayOrderDetailsDtos)
                 {
-                    DisplayOrderDetailsDto displayOrderDetailsDto = new DisplayOrderDetailsDto();
-                    displayOrderDetailsDto.ProductName = Convert.ToString(dataTable.Rows[i][0]);
-                    displayOrderDetailsDto.Quantity = Convert.ToInt32(dataTable.Rows[i][1]);
-                    displayOrderDetailsDto.Price = Convert.ToDecimal(dataTable.Rows[i][2]);
-                    displayOrderDetailsDto.TotalPrice = Convert.ToDecimal(dataTable.Rows[i][3]);
-                    table.AddRow(displayOrderDetailsDto.ProductName, displayOrderDetailsDto.Quantity, displayOrderDetailsDto.Price, displayOrderDetailsDto.TotalPrice);
+                    if (orderId != orderDetails.OrderId)
+                    {
+                        table.Write();
+                        DisplayOrdersOFUser(userId, orderId);
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        table = new ConsoleTable("Product Name", "Quantity", "Price", "Total Price");
+                        orderId = orderDetails.OrderId;
+                        table.AddRow(orderDetails.ProductName, orderDetails.Quantity, orderDetails.Price.ToString("C2"), orderDetails.TotalPrice.ToString("C2"));
+                    }
+                    else
+                    {
+                        table.AddRow(orderDetails.ProductName, orderDetails.Quantity, orderDetails.Price.ToString("C2"), orderDetails.TotalPrice.ToString("C2"));
+                    }
                 }
                 table.Write();
-                DisplayOrdersOFUser(userId);
+                DisplayOrdersOFUser(userId, orderId);
+                Console.ResetColor();
             }
         }
     }

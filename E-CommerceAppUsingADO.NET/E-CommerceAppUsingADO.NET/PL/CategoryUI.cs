@@ -46,32 +46,6 @@ namespace E_CommerceAppUsingADO.NET.PL
         }
         public static void DisplayAllProductOFOneCategory()
         {
-            // string name = CategoryValidations.validCategoryName();
-            // DataTable dataTable = Productmethods.GetAllByCategoryName(name);
-            // if (dataTable.Rows.Count == 0)
-            // {
-            //     Console.ForegroundColor = ConsoleColor.Red;
-            //     Console.WriteLine("Category Not Found!");
-            //     Console.ResetColor();
-            // }
-            // else
-            // {
-            //     List<Product> products = new List<Product>();
-            //     for (int i = 0; i < dataTable.Rows.Count; i++)
-            //     {
-            //         Product product = new Product();
-            //         product.Id = Convert.ToInt32(dataTable.Rows[i][0]);
-            //         product.Name = Convert.ToString(dataTable.Rows[i][1]);
-            //         product.Quantity = Convert.ToInt32(dataTable.Rows[i][2]);
-            //         product.Price = Convert.ToDecimal(dataTable.Rows[i][3]);
-            //         product.Description = Convert.ToString(dataTable.Rows[i][4]);
-            //         product.CategoryId = Convert.ToInt32(dataTable.Rows[i][5]);
-            //         products.Add(product);
-            //     }
-            //     ProductUI.PrintProducts(products);
-            // }
-            // Console.ReadKey();
-            //return dataTable.Rows.Count != 0;
             ProductUI.PrintProducts(CategoryValidations.GetProductsOFCategory());
             Console.ReadKey();
         }

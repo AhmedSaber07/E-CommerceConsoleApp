@@ -15,6 +15,6 @@ namespace E_CommerceAppUsingADO.NET.BL.Models
         public decimal Price { get; set; }
         //Relations
         public int CategoryId { get; set; }
-        public List<Order> Orders { get; set; }
+        //public List<Order> Orders { get; set; }
     }
 }

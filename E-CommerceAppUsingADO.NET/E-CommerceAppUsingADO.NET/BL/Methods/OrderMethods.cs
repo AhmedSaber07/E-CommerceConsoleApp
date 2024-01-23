@@ -28,18 +28,6 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             DA.close();
             return orderId;
         }
-        //public static int GetCountOFOrdersBySpecificProduct(int productId)
-        //{
-        //    DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
-        //    SqlParameter[] para = new SqlParameter[1];
-        //    DataTable dataTable = new DataTable();
-        //    para[0] = new SqlParameter("@id", SqlDbType.Int);
-        //    para[0].Value = productId;
-        //    DA.open();
-        //    dataTable = DA.GetData("GetCountOFOrdersByProductId", para);
-        //    DA.close();
-        //    return Convert.ToInt32(dataTable.Rows[0][0]);
-        //}
         public static DataTable getAllOrders()
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
@@ -49,13 +37,15 @@ namespace E_CommerceAppUsingADO.NET.BL.Methods
             DA.close();
             return dataTable;
         }
-        public static DataTable getAllOrdersOFUser(int userId)
+        public static DataTable getAllOrdersOFUser(int userId,int orderId)
         {
             DAL.DataAccessLayer DA = new DAL.DataAccessLayer();
             DataTable dataTable = new DataTable();
-            SqlParameter[] para = new SqlParameter[1];
+            SqlParameter[] para = new SqlParameter[2];
             para[0] = new SqlParameter("@userId", SqlDbType.Int);
             para[0].Value = userId;
+            para[1] = new SqlParameter("@orderId", SqlDbType.Int);
+            para[1].Value = orderId;
             DA.open();
             dataTable = DA.GetData("getAllOrdersOFUser",para);
             DA.close();

@@ -1,4 +1,7 @@
-﻿using E_CommerceAppUsingADO.NET.BL.Methods;
+﻿using E_CommerceAppUsingADO.NET.BL.Dtos;
+using E_CommerceAppUsingADO.NET.BL.Enums;
+using E_CommerceAppUsingADO.NET.BL.Methods;
+using E_CommerceAppUsingADO.NET.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -160,6 +163,33 @@ namespace E_CommerceAppUsingADO.NET.BL.Validations
                     DisplayTextWithRedColor($"Enter Valid {input}!");
             } while (!isRequired(name) || !isValidName(name));
             return name;
+        }
+
+        //Check Login 
+        public static int CheckValidLogin()
+        {
+            DataTable dataTable = new DataTable();
+            LoginDto login = new LoginDto();
+            User user = new User();
+            login.Email =checkEmailValidationForLogin();
+            login.Password = checkPasswordValidationForLogin();
+            dataTable = UserMethods.Login(login);
+            if (dataTable.Rows.Count == 0)
+            {
+                DisplayTextWithRedColor("Email or Password Invalid");
+                Console.ReadKey();
+            }
+            else
+            {
+                user.Id = Convert.ToInt32(dataTable.Rows[0][0]);
+                user.FirstName = Convert.ToString(dataTable.Rows[0][1]);
+                user.LastName = Convert.ToString(dataTable.Rows[0][2]);
+                user.Password = Convert.ToString(dataTable.Rows[0][3]);
+                user.UserType = (UserType)Convert.ToInt32(dataTable.Rows[0][4]);
+                user.Email = Convert.ToString(dataTable.Rows[0][5]);
+                user.PhoneNumber = Convert.ToString(dataTable.Rows[0][6]);
+            }
+            return user.Id;
         }
     }
 }
